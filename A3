@@ -1,0 +1,42 @@
+void setup() {
+  size(400, 300);
+}
+
+void draw() {
+  background(135, 206, 250); // Light blue for the sky
+
+  drawOcean(); // Draw the ocean waves
+  drawBoat(mouseX, mouseY); // Draw the boat at the mouse position
+}
+
+void drawOcean() {
+  fill(0, 0, 128); // Dark blue for the ocean
+  noStroke();
+
+  // Draw waves
+  for (int y = height / 2; y < height; y += 20) {
+    beginShape();
+    for (int x = 0; x < width; x += 10) {
+      float wave = sin(radians(x + y + frameCount * 5));
+      vertex(x, y + wave * 10);
+    }
+    endShape();
+  }
+}
+
+void drawBoat(float x, float y) {
+  fill(139, 69, 19); // Saddle brown for the boat
+  rect(x - 30, y - 10, 60, 30); // Body
+
+  // Sail
+  fill(255); // White for the sail
+  triangle(x - 15, y - 10, x, y - 40, x + 15, y - 10);
+
+  // Mast
+  fill(139, 69, 19); // Saddle brown for the mast
+  rect(x - 5, y - 40, 10, 30);
+
+  // Flag
+  fill(255, 0, 0); // Red for the flag
+  rect(x + 2, y - 40, 5, 10);
+}
